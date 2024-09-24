@@ -22,7 +22,7 @@
 
 (defn matching-part
   [part]
-  {:name (clojure.string/replace (:name part) #"^left-" "right")
+  {:name (clojure.string/replace (:name part) #"^left-" "right-")
    :size (:size part)})
 
 ;(defn symetrize-body-parts
