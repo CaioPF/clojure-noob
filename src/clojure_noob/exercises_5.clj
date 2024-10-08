@@ -3,11 +3,11 @@
 ; Recursive problem solving
 (defn sum
   ([vals]
-    (sum vals 0))
+   (sum vals 0))
   ([vals accumulating-total]
-    (if (empty? vals)
-      accumulating-total
-      (recur (rest vals) (+ (first vals) accumulating-total)))))
+   (if (empty? vals)
+     accumulating-total
+     (recur (rest vals) (+ (first vals) accumulating-total)))))
 
 ; The comp function
 (def character
@@ -41,16 +41,42 @@
 (attr character :intelligence)
 
 ; 2. Implement the comp function.
+(defn my-comp
+  [& functions]
+  (fn [& x]
+    (reduce
+     (fn [result function]
+       (if (= result x)
+         (apply function result)
+         (function result)))
+     x
+     (reverse functions))))
 
+(def square (fn [x] (* x x)))
+
+; ((my-comp inc square +) 1 3)
 
 ; 3. Implement the assoc-in function. Hint: use the assoc function and define its parameters as [m [k & ks] v].
- (defn my-assoc-in
-  []
-  )
+(defn my-assoc-in
+  [m [k & ks] v]
+  (if (pos? (count ks))
+    (assoc m k (my-assoc-in (get m k) ks v))
+    (assoc m k v)))
+
+(def my-map {:a {:b {:c 1}}})
+(my-assoc-in my-map [:a :d :e] 2)
+(my-assoc-in my-map [:a :b :e] 3)
+(my-assoc-in my-map [:a :b :c] 4)
 
 ; 4. Look up and use the update-in function.
+(def some-map {:a 2 :b [1 0 3 5]})
+(update-in some-map [:b 2] + 5)
 
 ; 5. Implement update-in.
 (defn my-update-in
-  []
-  )
+  [m [k & ks] f & args]
+  (if (pos? (count ks))
+    (assoc m k (apply my-update-in (get m k) ks f args))
+    (assoc m k (apply f (get m k) args))))
+
+(my-update-in {:age 100} [:age] / 2 5)
