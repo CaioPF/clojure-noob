@@ -1,6 +1,7 @@
 (ns clojure-noob.the-divine-cheese-code
   (:require [clojure.java.browse :as browse]
-            [visualization.svg :refer [xml]]))
+            [clojure-noob.visualization.svg :refer [xml]])
+  (:gen-class))
 
 (def heists [{:location "Cologne, Germany"
               :cheese-name "Archbishop Hildebold's Cheese Pretzel"
@@ -35,7 +36,7 @@
   (str "<style>polyline { fill:none; stroke:#5881d8; stroke-width:3}</style>"
        contents))
 
-(defn -drawing
+(defn drawing
   [& args]
   (let [filename "map.html"]
     (->> heists

@@ -1,0 +1,1 @@
+["^ ","~$infix",["^ ","~:row",9,"~:col",1,"~:fixed-arities",["~#set",[1]],"~:name","^0","~:ns","~$clojure-noob.exercises-7","~:top-ns","^7","~:arities",["^ ","~i1",["^ ","~:ret","~:list","~:arglist-str","[[num1 plus num2 times num3 minus num4]]"]],"~:type","~:fn"],"~:filename","/Users/caio.palma/Documents/clojure-noob/src/clojure_noob/exercises_7.clj"]
